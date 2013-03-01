@@ -23,9 +23,9 @@
 				padding: 10px;
 				margin-top: -150px;
 				margin-left: -240px;
-				// background-color: #000;
-				background-image: url("carbon.jpg");
-				background-repeat: repeat;
+			    background-color: #000;
+				/*background-image: url("carbon.jpg");
+				background-repeat: repeat;*/
 				color: #FFF;
 				-moz-border-radius: 10px;
 				border-radius: 10px;
@@ -52,7 +52,13 @@
                 margin-bottom: 0px;
                 padding-top: 2px;
                 padding-bottom: 2px;
-			}
+            }
+
+            iframe#github-button {
+                width: 80px;
+                height: 30px;
+                margin-top: 5px;
+            }
 		</style>
 		
 		<script type="text/javascript" src="swfobject.js"></script>
@@ -66,17 +72,21 @@
 						{ autostart: "false", file: stream, streamer: server }, // flashvars
 						{ allowfullscreen: "true", autostart: "true" }, // params
 						{ id: "playerSwf" }); // attributes
-			}
+            }
+
+            function fullreload(server, stream) {
+                swfobject.removeSWF("playerSwf");
+				$("#content").prepend("<div id=\"player\"></div>");
+                reload(server, stream);
+            }
 			
             $(document).ready(function() {
                 $("#serverInput").val(localStorage.getItem("serverInput"));
                 $("#streamInput").val(localStorage.getItem("streamInput"));
-
-				reload("rtmp://localhost/live", "stream");
+                fullreload($("#serverInput").val(), $("#streamInput").val());
+				
 				$("#submitButton").click(function() {
-					swfobject.removeSWF("playerSwf");
-					$("#content").prepend("<div id=\"player\"></div>");
-				    reload($("#serverInput").val(), $("#streamInput").val());
+					fullreload($("#serverInput").val(), $("#streamInput").val());
                 });
 
                 // when an input changes, store its value in local storage
@@ -88,9 +98,7 @@
                     clearTimeout(timeout);
 
                     timeout = setTimeout(function() {
-                        swfobject.removeSWF("playerSwf");
-                        $("#content").prepend("<div id=\"player\"></div>");
-                        reload($("#serverInput").val(), $("#streamInput").val());
+                        fullreload($("#serverInput").val(), $("#streamInput").val());
                     }, 700);
                 });
 			});
@@ -101,13 +109,13 @@
             <div class="navbar-inner">
                 <div class="container">
                     <a class="brand" href="#">streamviewer</a>
+                    <iframe id="github-button" class="pull-right" src="http://ghbtns.com/github-btn.html?user=rfkrocktk&repo=streamviewer&type=fork&size=large"
+                          allowtransparency="true" frameborder="0" scrolling="0"></iframe>
                 </div>
             </div>
         </div>
 		<div id="content">
-			<div id="player">
-				The player should show up here.
-			</div>
+			<div id="player"></div>
 			<form>
                 <input type="text" id="serverInput" class="textInput" placeholder="Server URI"/>
                 <input type="text" id="streamInput" class="textInput" placeholder="Stream Name"/>
