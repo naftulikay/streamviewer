@@ -6,7 +6,7 @@
 			body { 
 				padding: 0px;
 				margin: 0px;
-				background-image: url("bg.gif");
+				background-image: url("img/bg.gif");
 				background-repeat: repeat;
 			}
 			
@@ -61,13 +61,13 @@
             }
 		</style>
 		
-		<script type="text/javascript" src="swfobject.js"></script>
-		<script type="text/javascript" src="jquery.js"></script>
+		<script type="text/javascript" src="js/swfobject.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
 		<script type="text/javascript">					
             var timeout = -1;
             
             function reload(server, stream) {			
-				swfobject.embedSWF("player.swf", "player", "480", "270",
+				swfobject.embedSWF("swf/player.swf", "player", "480", "270",
 						"10.1.0", "false", 
 						{ autostart: "false", file: stream, streamer: server }, // flashvars
 						{ allowfullscreen: "true", autostart: "true" }, // params
