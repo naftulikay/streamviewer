@@ -1,0 +1,11 @@
+#streamviewer#
+Stream viewer is a very simple web application which allows you to directly 
+view streams from media servers and HTTP endpoints. By supplying a server URI 
+and a stream name, you can connect to that server and view that stream in JW 
+Player. 
+
+View RTMP streams by using a URL like `rtmp://localhost/live` and a stream name
+like `mp4:testStream`. 
+
+This app was designed primarily to make testing streams a bit easier for the 
+overburdened developer.
